@@ -7,7 +7,7 @@ const api = axios.create({
   },
 })
 
-// Add token
+// Attach token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -16,7 +16,7 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// Handle auth errors
+// Handle 401
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -28,11 +28,12 @@ api.interceptors.response.use(
   }
 )
 
+// ✅ ADD THIS BACK
 export const notificationApi = {
   fetchNotifications: () => api.get('/notifications'),
   markAsRead: (id: string) => api.put(`/notifications/${id}/read`),
   markAllAsRead: () => api.put('/notifications/read-all'),
-  deleteNotification: (id: string) => api.delete(`/notifications/${id}`)
+  deleteNotification: (id: string) => api.delete(`/notifications/${id}`),
 }
 
 export default api

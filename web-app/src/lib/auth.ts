@@ -25,6 +25,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   checkAuth: async () => {
     const token = localStorage.getItem('token')
+
     if (!token) {
       set({ isAuthenticated: false, user: null })
       return
@@ -32,63 +33,55 @@ export const useAuthStore = create<AuthState>((set) => ({
 
     try {
       const response = await api.get('/auth/me')
-      set({ user: response.data, isAuthenticated: true, token })
+
+      set({
+        user: response.data,
+        isAuthenticated: true,
+        token,
+      })
     } catch {
       localStorage.removeItem('token')
       set({ isAuthenticated: false, user: null, token: null })
     }
   },
 
-  login: async (email: string, password: string) => {
-  const response = await api.post('/auth/login', {
-    email,
-    password,
-  })
+  login: async (email, password) => {
+    const response = await api.post('/auth/login', {
+      email,
+      password,
+    })
 
-  const { access_token, user } = response.data
+    const { access_token, user } = response.data
 
-  localStorage.setItem(
-    'token',
-    access_token
-  )
+    localStorage.setItem('token', access_token)
 
-  set({
-    token: access_token,
-    user,
-    isAuthenticated: true,
-  })
-},
+    set({
+      token: access_token,
+      user,
+      isAuthenticated: true,
+    })
+  },
+
   logout: () => {
     localStorage.removeItem('token')
     set({ user: null, token: null, isAuthenticated: false })
   },
 
-  signup: async (
-  email: string,
-  password: string,
-  name: string
-) => {
-  const response = await api.post(
-    '/api/auth/signup',
-    {
+  signup: async (email, password, name) => {
+    const response = await api.post('/auth/signup', {
       email,
       password,
       name,
-    }
-  )
+    })
 
-  const { access_token, user } =
-    response.data
+    const { access_token, user } = response.data
 
-  localStorage.setItem(
-    'token',
-    access_token
-  )
+    localStorage.setItem('token', access_token)
 
-  set({
-    token: access_token,
-    user,
-    isAuthenticated: true,
-  })
-},
+    set({
+      token: access_token,
+      user,
+      isAuthenticated: true,
+    })
+  },
 }))
