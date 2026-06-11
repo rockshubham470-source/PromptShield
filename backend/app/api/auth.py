@@ -1,0 +1,188 @@
+from fastapi import (
+    APIRouter,
+    Depends,
+    HTTPException,
+    status,
+)
+from fastapi.security import (
+    HTTPBearer,
+    HTTPAuthorizationCredentials,
+)
+from sqlalchemy.orm import Session
+from datetime import timedelta
+
+from app.core.database import get_db
+from app.core.security import (
+    hash_password,
+    verify_password,
+    create_access_token,
+    create_refresh_token,
+    verify_token,
+)
+
+from app.models import User
+from app.schemas import (
+    UserCreate,
+    UserLogin,
+    UserResponse,
+    TokenResponse,
+)
+
+from app.core.config import settings
+
+router = APIRouter(
+    prefix="/auth",
+    tags=["auth"]
+)
+
+security = HTTPBearer()
+
+
+# ==========================================
+# AUTH DEPENDENCY
+# ==========================================
+
+async def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: Session = Depends(get_db)
+):
+    token = credentials.credentials
+
+    payload = verify_token(token)
+
+    if not payload:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired token"
+        )
+
+    user_id = payload.get("sub")
+
+    user = db.query(User).filter(
+        User.id == user_id
+    ).first()
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+
+    return user
+
+
+# ==========================================
+# SIGNUP
+# ==========================================
+
+@router.post(
+    "/signup",
+    response_model=TokenResponse
+)
+async def signup(
+    user_data: UserCreate,
+    db: Session = Depends(get_db)
+):
+    existing_user = db.query(User).filter(
+        User.email == user_data.email
+    ).first()
+
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email already registered"
+        )
+
+    user = User(
+        email=user_data.email,
+        name=user_data.name,
+        password_hash=hash_password(
+            user_data.password
+        ),
+        tier="free"
+    )
+
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+
+    access_token = create_access_token(
+        data={"sub": user.id},
+        expires_delta=timedelta(
+            minutes=settings.access_token_expire_minutes
+        )
+    )
+
+    refresh_token = create_refresh_token(
+        data={"sub": user.id}
+    )
+
+    return {
+        "access_token": access_token,
+        "refresh_token": refresh_token,
+        "user": UserResponse.from_orm(user)
+    }
+
+
+# ==========================================
+# LOGIN
+# ==========================================
+
+@router.post(
+    "/login",
+    response_model=TokenResponse
+)
+async def login(
+    credentials: UserLogin,
+    db: Session = Depends(get_db)
+):
+    user = db.query(User).filter(
+        User.email == credentials.email
+    ).first()
+
+    if (
+        not user
+        or not verify_password(
+            credentials.password,
+            user.password_hash
+        )
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid credentials"
+        )
+
+    access_token = create_access_token(
+        data={"sub": user.id},
+        expires_delta=timedelta(
+            minutes=settings.access_token_expire_minutes
+        )
+    )
+
+    refresh_token = create_refresh_token(
+        data={"sub": user.id}
+    )
+
+    return {
+        "access_token": access_token,
+        "refresh_token": refresh_token,
+        "user": UserResponse.from_orm(user)
+    }
+
+
+# ==========================================
+# CURRENT USER
+# ==========================================
+
+@router.get(
+    "/me",
+    response_model=UserResponse
+)
+async def me(
+    current_user: User = Depends(
+        get_current_user
+    )
+):
+    return UserResponse.from_orm(
+        current_user
+    )

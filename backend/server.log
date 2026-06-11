@@ -1,0 +1,730 @@
+INFO:     Will watch for changes in these directories: ['/Users/shubhamchhapolika/promptshield/backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [7350] using WatchFiles
+2026-06-11 12:20:50,935 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:20:50,935 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("users")
+2026-06-11 12:20:50,935 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("applications")
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("api_keys")
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("detections")
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("rules")
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("audit_logs")
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("usage_metrics")
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-06-11 12:20:50,936 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     Started server process [7354]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:55553 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-06-11 12:21:31,388 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:31,390 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:31,390 INFO sqlalchemy.engine.Engine [generated in 0.00017s] ('test@example.com', 1, 0)
+INFO:     127.0.0.1:55553 - "POST /api/auth/login HTTP/1.1" 200 OK
+2026-06-11 12:21:31,598 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:55553 - "OPTIONS /api/detections HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55556 - "OPTIONS /api/applications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55553 - "OPTIONS /api/detections HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55556 - "OPTIONS /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:21:31,625 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:31,626 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:31,627 INFO sqlalchemy.engine.Engine [generated in 0.00022s] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:31,628 INFO sqlalchemy.engine.Engine SELECT detections.id AS detections_id, detections.user_id AS detections_user_id, detections.application_id AS detections_application_id, detections.prompt AS detections_prompt, detections.risk_score AS detections_risk_score, detections.risk_level AS detections_risk_level, detections.detected_patterns AS detections_detected_patterns, detections.processing_time_ms AS detections_processing_time_ms, detections.source AS detections_source, detections.created_at AS detections_created_at 
+FROM detections 
+WHERE detections.user_id = ? ORDER BY detections.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:31,628 INFO sqlalchemy.engine.Engine [generated in 0.00014s] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 50, 0)
+INFO:     127.0.0.1:55559 - "GET /api/detections HTTP/1.1" 200 OK
+2026-06-11 12:21:31,630 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:31,630 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:31,630 INFO sqlalchemy.engine.Engine [cached since 0.003629s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:31,631 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:21:31,631 INFO sqlalchemy.engine.Engine [generated in 0.00011s] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55562 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:21:31,632 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:31,633 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:31,634 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:31,634 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:31,634 INFO sqlalchemy.engine.Engine [cached since 0.007565s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:31,634 INFO sqlalchemy.engine.Engine SELECT detections.id AS detections_id, detections.user_id AS detections_user_id, detections.application_id AS detections_application_id, detections.prompt AS detections_prompt, detections.risk_score AS detections_risk_score, detections.risk_level AS detections_risk_level, detections.detected_patterns AS detections_detected_patterns, detections.processing_time_ms AS detections_processing_time_ms, detections.source AS detections_source, detections.created_at AS detections_created_at 
+FROM detections 
+WHERE detections.user_id = ? ORDER BY detections.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:31,634 INFO sqlalchemy.engine.Engine [cached since 0.006322s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 50, 0)
+INFO:     127.0.0.1:55559 - "GET /api/detections HTTP/1.1" 200 OK
+2026-06-11 12:21:31,635 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:31,635 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:31,635 INFO sqlalchemy.engine.Engine [cached since 0.008896s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:31,635 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:21:31,635 INFO sqlalchemy.engine.Engine [cached since 0.00417s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55562 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:21:31,636 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:31,636 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     ('127.0.0.1', 55602) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 55618) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+2026-06-11 12:21:46,119 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:46,120 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:46,120 INFO sqlalchemy.engine.Engine [cached since 14.49s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:46,121 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:21:46,121 INFO sqlalchemy.engine.Engine [cached since 14.49s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55563 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:21:46,124 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:46,128 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:46,128 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:46,128 INFO sqlalchemy.engine.Engine [cached since 14.5s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:46,129 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:21:46,129 INFO sqlalchemy.engine.Engine [cached since 14.5s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55563 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:21:46,130 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:47,219 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:47,219 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:47,219 INFO sqlalchemy.engine.Engine [cached since 15.59s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:47,220 INFO sqlalchemy.engine.Engine SELECT detections.id AS detections_id, detections.user_id AS detections_user_id, detections.application_id AS detections_application_id, detections.prompt AS detections_prompt, detections.risk_score AS detections_risk_score, detections.risk_level AS detections_risk_level, detections.detected_patterns AS detections_detected_patterns, detections.processing_time_ms AS detections_processing_time_ms, detections.source AS detections_source, detections.created_at AS detections_created_at 
+FROM detections 
+WHERE detections.user_id = ? ORDER BY detections.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:47,220 INFO sqlalchemy.engine.Engine [cached since 15.59s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 50, 0)
+INFO:     127.0.0.1:55563 - "GET /api/detections HTTP/1.1" 200 OK
+2026-06-11 12:21:47,227 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:47,227 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:47,227 INFO sqlalchemy.engine.Engine [cached since 15.6s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:47,228 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:21:47,228 INFO sqlalchemy.engine.Engine [cached since 15.6s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55564 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:21:47,229 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:47,229 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:47,230 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:47,231 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:47,231 INFO sqlalchemy.engine.Engine [cached since 15.6s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:47,231 INFO sqlalchemy.engine.Engine SELECT detections.id AS detections_id, detections.user_id AS detections_user_id, detections.application_id AS detections_application_id, detections.prompt AS detections_prompt, detections.risk_score AS detections_risk_score, detections.risk_level AS detections_risk_level, detections.detected_patterns AS detections_detected_patterns, detections.processing_time_ms AS detections_processing_time_ms, detections.source AS detections_source, detections.created_at AS detections_created_at 
+FROM detections 
+WHERE detections.user_id = ? ORDER BY detections.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:47,231 INFO sqlalchemy.engine.Engine [cached since 15.6s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 50, 0)
+INFO:     127.0.0.1:55563 - "GET /api/detections HTTP/1.1" 200 OK
+2026-06-11 12:21:47,232 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:47,232 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:47,232 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:47,232 INFO sqlalchemy.engine.Engine [cached since 15.61s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:47,233 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:21:47,233 INFO sqlalchemy.engine.Engine [cached since 15.6s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55564 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:21:47,233 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     ('127.0.0.1', 55621) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+2026-06-11 12:21:54,434 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:54,434 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:54,434 INFO sqlalchemy.engine.Engine [cached since 22.81s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:54,435 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:21:54,435 INFO sqlalchemy.engine.Engine [cached since 22.8s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55625 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:21:54,439 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:54,441 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:54,441 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:54,441 INFO sqlalchemy.engine.Engine [cached since 22.81s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:54,442 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:21:54,442 INFO sqlalchemy.engine.Engine [cached since 22.81s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55625 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:21:54,443 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:54,445 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:54,445 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:54,445 INFO sqlalchemy.engine.Engine [cached since 22.82s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:54,446 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:21:54,446 INFO sqlalchemy.engine.Engine [cached since 22.81s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55625 - "GET /api/applications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55627 - "OPTIONS /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:21:54,447 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:54,447 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:54,448 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:54,448 INFO sqlalchemy.engine.Engine [cached since 22.82s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:54,448 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:21:54,448 INFO sqlalchemy.engine.Engine [cached since 22.82s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55625 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:21:54,448 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:54,449 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:54,449 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:54,449 INFO sqlalchemy.engine.Engine [cached since 22.82s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:54,450 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.id = ? AND applications.user_id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:54,450 INFO sqlalchemy.engine.Engine [generated in 0.00013s] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 'e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:54,451 INFO sqlalchemy.engine.Engine SELECT audit_logs.id AS audit_logs_id, audit_logs.user_id AS audit_logs_user_id, audit_logs.application_id AS audit_logs_application_id, audit_logs.action AS audit_logs_action, audit_logs.resource AS audit_logs_resource, audit_logs.details AS audit_logs_details, audit_logs.ip_address AS audit_logs_ip_address, audit_logs.user_agent AS audit_logs_user_agent, audit_logs.created_at AS audit_logs_created_at 
+FROM audit_logs 
+WHERE audit_logs.application_id = ? ORDER BY audit_logs.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:54,451 INFO sqlalchemy.engine.Engine [generated in 0.00010s] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 50, 0)
+INFO:     127.0.0.1:55627 - "GET /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:21:54,452 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:21:54,454 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:21:54,454 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:54,454 INFO sqlalchemy.engine.Engine [cached since 22.83s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:54,454 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.id = ? AND applications.user_id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:54,454 INFO sqlalchemy.engine.Engine [cached since 0.004377s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 'e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:21:54,455 INFO sqlalchemy.engine.Engine SELECT audit_logs.id AS audit_logs_id, audit_logs.user_id AS audit_logs_user_id, audit_logs.application_id AS audit_logs_application_id, audit_logs.action AS audit_logs_action, audit_logs.resource AS audit_logs_resource, audit_logs.details AS audit_logs_details, audit_logs.ip_address AS audit_logs_ip_address, audit_logs.user_agent AS audit_logs_user_agent, audit_logs.created_at AS audit_logs_created_at 
+FROM audit_logs 
+WHERE audit_logs.application_id = ? ORDER BY audit_logs.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:21:54,455 INFO sqlalchemy.engine.Engine [cached since 0.003504s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 50, 0)
+INFO:     127.0.0.1:55627 - "GET /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:21:54,455 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:22:02,469 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:22:02,469 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:22:02,470 INFO sqlalchemy.engine.Engine [cached since 30.84s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:22:02,471 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:22:02,471 INFO sqlalchemy.engine.Engine [cached since 30.84s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55629 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:22:02,474 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:22:02,476 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:22:02,477 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:22:02,477 INFO sqlalchemy.engine.Engine [cached since 30.85s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:22:02,478 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:22:02,478 INFO sqlalchemy.engine.Engine [cached since 30.85s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55629 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:22:02,479 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:22:02,480 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:22:02,480 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:22:02,481 INFO sqlalchemy.engine.Engine [cached since 30.85s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:22:02,481 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:22:02,481 INFO sqlalchemy.engine.Engine [cached since 30.85s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55629 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:22:02,481 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:22:02,482 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:22:02,482 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:22:02,482 INFO sqlalchemy.engine.Engine [cached since 30.86s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:22:02,482 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.id = ? AND applications.user_id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:22:02,482 INFO sqlalchemy.engine.Engine [cached since 8.033s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 'e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:22:02,483 INFO sqlalchemy.engine.Engine SELECT audit_logs.id AS audit_logs_id, audit_logs.user_id AS audit_logs_user_id, audit_logs.application_id AS audit_logs_application_id, audit_logs.action AS audit_logs_action, audit_logs.resource AS audit_logs_resource, audit_logs.details AS audit_logs_details, audit_logs.ip_address AS audit_logs_ip_address, audit_logs.user_agent AS audit_logs_user_agent, audit_logs.created_at AS audit_logs_created_at 
+FROM audit_logs 
+WHERE audit_logs.application_id = ? ORDER BY audit_logs.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:22:02,483 INFO sqlalchemy.engine.Engine [cached since 8.032s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 50, 0)
+INFO:     127.0.0.1:55634 - "GET /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:22:02,483 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:22:02,484 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:22:02,484 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:22:02,484 INFO sqlalchemy.engine.Engine [cached since 30.86s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:22:02,484 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:22:02,484 INFO sqlalchemy.engine.Engine [cached since 30.85s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:55629 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:22:02,485 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:22:02,486 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:22:02,487 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:22:02,487 INFO sqlalchemy.engine.Engine [cached since 30.86s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:22:02,487 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.id = ? AND applications.user_id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:22:02,487 INFO sqlalchemy.engine.Engine [cached since 8.037s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 'e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:22:02,487 INFO sqlalchemy.engine.Engine SELECT audit_logs.id AS audit_logs_id, audit_logs.user_id AS audit_logs_user_id, audit_logs.application_id AS audit_logs_application_id, audit_logs.action AS audit_logs_action, audit_logs.resource AS audit_logs_resource, audit_logs.details AS audit_logs_details, audit_logs.ip_address AS audit_logs_ip_address, audit_logs.user_agent AS audit_logs_user_agent, audit_logs.created_at AS audit_logs_created_at 
+FROM audit_logs 
+WHERE audit_logs.application_id = ? ORDER BY audit_logs.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:22:02,487 INFO sqlalchemy.engine.Engine [cached since 8.036s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 50, 0)
+INFO:     127.0.0.1:55629 - "GET /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:22:02,488 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:55872 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55940 - "POST /api/auth/login HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:56539 - "GET /api/notifications HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56718 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56720 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+2026-06-11 12:26:21,363 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:26:21,364 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,364 INFO sqlalchemy.engine.Engine [cached since 289.7s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+INFO:     127.0.0.1:56720 - "GET /api/auth/me HTTP/1.1" 200 OK
+2026-06-11 12:26:21,364 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:26:21,365 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:26:21,365 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,365 INFO sqlalchemy.engine.Engine [cached since 289.7s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+INFO:     127.0.0.1:56720 - "GET /api/auth/me HTTP/1.1" 200 OK
+2026-06-11 12:26:21,366 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:26:21,553 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:26:21,553 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,553 INFO sqlalchemy.engine.Engine [cached since 289.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:26:21,553 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:26:21,553 INFO sqlalchemy.engine.Engine [cached since 289.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:56720 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:26:21,554 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:26:21,554 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:26:21,554 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,554 INFO sqlalchemy.engine.Engine [cached since 289.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:26:21,555 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:26:21,555 INFO sqlalchemy.engine.Engine [cached since 289.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:56720 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:26:21,557 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:26:21,561 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:26:21,562 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,562 INFO sqlalchemy.engine.Engine [cached since 289.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:26:21,563 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:26:21,563 INFO sqlalchemy.engine.Engine [cached since 289.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:56720 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:26:21,564 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:26:21,566 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:26:21,567 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,567 INFO sqlalchemy.engine.Engine [cached since 289.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:26:21,567 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.id = ? AND applications.user_id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,567 INFO sqlalchemy.engine.Engine [cached since 267.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 'e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:26:21,567 INFO sqlalchemy.engine.Engine SELECT audit_logs.id AS audit_logs_id, audit_logs.user_id AS audit_logs_user_id, audit_logs.application_id AS audit_logs_application_id, audit_logs.action AS audit_logs_action, audit_logs.resource AS audit_logs_resource, audit_logs.details AS audit_logs_details, audit_logs.ip_address AS audit_logs_ip_address, audit_logs.user_agent AS audit_logs_user_agent, audit_logs.created_at AS audit_logs_created_at 
+FROM audit_logs 
+WHERE audit_logs.application_id = ? ORDER BY audit_logs.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,567 INFO sqlalchemy.engine.Engine [cached since 267.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 50, 0)
+INFO:     127.0.0.1:56718 - "GET /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:26:21,568 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:26:21,568 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:26:21,569 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,569 INFO sqlalchemy.engine.Engine [cached since 289.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:26:21,569 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:26:21,569 INFO sqlalchemy.engine.Engine [cached since 289.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:56720 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:26:21,569 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:26:21,581 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:26:21,581 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,581 INFO sqlalchemy.engine.Engine [cached since 289.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:26:21,582 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.id = ? AND applications.user_id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,582 INFO sqlalchemy.engine.Engine [cached since 267.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 'e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:26:21,582 INFO sqlalchemy.engine.Engine SELECT audit_logs.id AS audit_logs_id, audit_logs.user_id AS audit_logs_user_id, audit_logs.application_id AS audit_logs_application_id, audit_logs.action AS audit_logs_action, audit_logs.resource AS audit_logs_resource, audit_logs.details AS audit_logs_details, audit_logs.ip_address AS audit_logs_ip_address, audit_logs.user_agent AS audit_logs_user_agent, audit_logs.created_at AS audit_logs_created_at 
+FROM audit_logs 
+WHERE audit_logs.application_id = ? ORDER BY audit_logs.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:26:21,582 INFO sqlalchemy.engine.Engine [cached since 267.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 50, 0)
+INFO:     127.0.0.1:56720 - "GET /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:26:21,583 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     ('127.0.0.1', 56751) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 56789) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 56796) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+2026-06-11 12:35:12,314 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:12,314 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,314 INFO sqlalchemy.engine.Engine [cached since 820.7s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+INFO:     127.0.0.1:59071 - "GET /api/auth/me HTTP/1.1" 200 OK
+2026-06-11 12:35:12,314 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:35:12,315 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:12,315 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,315 INFO sqlalchemy.engine.Engine [cached since 820.7s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+INFO:     127.0.0.1:59071 - "GET /api/auth/me HTTP/1.1" 200 OK
+2026-06-11 12:35:12,316 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:59071 - "OPTIONS /api/applications HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 59079) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     127.0.0.1:59082 - "OPTIONS /api/applications HTTP/1.1" 200 OK
+INFO:     connection closed
+INFO:     127.0.0.1:59083 - "OPTIONS /api/applications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "OPTIONS /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:35:12,547 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:12,548 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,548 INFO sqlalchemy.engine.Engine [cached since 820.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:12,548 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:35:12,548 INFO sqlalchemy.engine.Engine [cached since 820.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:59071 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:35:12,549 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     ('127.0.0.1', 59090) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+2026-06-11 12:35:12,556 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:12,557 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,557 INFO sqlalchemy.engine.Engine [cached since 820.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:12,557 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:35:12,557 INFO sqlalchemy.engine.Engine [cached since 820.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:59071 - "GET /api/applications HTTP/1.1" 200 OK
+INFO:     connection closed
+2026-06-11 12:35:12,558 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:35:12,559 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:12,559 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,559 INFO sqlalchemy.engine.Engine [cached since 820.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:12,559 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:35:12,559 INFO sqlalchemy.engine.Engine [cached since 820.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:59071 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:35:12,560 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:59085 - "OPTIONS /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:35:12,562 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:12,562 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,562 INFO sqlalchemy.engine.Engine [cached since 820.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:12,563 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:35:12,563 INFO sqlalchemy.engine.Engine [cached since 820.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:59071 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:35:12,563 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:35:12,564 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:12,564 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,564 INFO sqlalchemy.engine.Engine [cached since 820.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:12,564 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.id = ? AND applications.user_id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,565 INFO sqlalchemy.engine.Engine [cached since 798.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 'e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:12,565 INFO sqlalchemy.engine.Engine SELECT audit_logs.id AS audit_logs_id, audit_logs.user_id AS audit_logs_user_id, audit_logs.application_id AS audit_logs_application_id, audit_logs.action AS audit_logs_action, audit_logs.resource AS audit_logs_resource, audit_logs.details AS audit_logs_details, audit_logs.ip_address AS audit_logs_ip_address, audit_logs.user_agent AS audit_logs_user_agent, audit_logs.created_at AS audit_logs_created_at 
+FROM audit_logs 
+WHERE audit_logs.application_id = ? ORDER BY audit_logs.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,565 INFO sqlalchemy.engine.Engine [cached since 798.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 50, 0)
+INFO:     127.0.0.1:59083 - "GET /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:35:12,566 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:35:12,567 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:12,567 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,567 INFO sqlalchemy.engine.Engine [cached since 820.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:12,568 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.id = ? AND applications.user_id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,568 INFO sqlalchemy.engine.Engine [cached since 798.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 'e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:12,568 INFO sqlalchemy.engine.Engine SELECT audit_logs.id AS audit_logs_id, audit_logs.user_id AS audit_logs_user_id, audit_logs.application_id AS audit_logs_application_id, audit_logs.action AS audit_logs_action, audit_logs.resource AS audit_logs_resource, audit_logs.details AS audit_logs_details, audit_logs.ip_address AS audit_logs_ip_address, audit_logs.user_agent AS audit_logs_user_agent, audit_logs.created_at AS audit_logs_created_at 
+FROM audit_logs 
+WHERE audit_logs.application_id = ? ORDER BY audit_logs.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:12,568 INFO sqlalchemy.engine.Engine [cached since 798.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 50, 0)
+INFO:     127.0.0.1:59083 - "GET /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:35:12,569 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     ('127.0.0.1', 59150) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59168) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59175) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59191) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+2026-06-11 12:35:31,348 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:31,349 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,349 INFO sqlalchemy.engine.Engine [cached since 839.7s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+INFO:     127.0.0.1:59087 - "GET /api/auth/me HTTP/1.1" 200 OK
+2026-06-11 12:35:31,350 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:35:31,350 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:31,351 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,351 INFO sqlalchemy.engine.Engine [cached since 839.7s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+INFO:     127.0.0.1:59087 - "GET /api/auth/me HTTP/1.1" 200 OK
+2026-06-11 12:35:31,351 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:35:31,541 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:31,541 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,541 INFO sqlalchemy.engine.Engine [cached since 839.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:31,542 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:35:31,542 INFO sqlalchemy.engine.Engine [cached since 839.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:59087 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:35:31,543 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     ('127.0.0.1', 59240) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+2026-06-11 12:35:31,544 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:31,544 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,544 INFO sqlalchemy.engine.Engine [cached since 839.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:31,544 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:35:31,544 INFO sqlalchemy.engine.Engine [cached since 839.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:59087 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:35:31,545 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:35:31,546 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:31,546 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,546 INFO sqlalchemy.engine.Engine [cached since 839.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:31,547 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:35:31,547 INFO sqlalchemy.engine.Engine [cached since 839.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:59087 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:35:31,547 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:35:31,548 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:31,548 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,548 INFO sqlalchemy.engine.Engine [cached since 839.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:31,549 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.id = ? AND applications.user_id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,549 INFO sqlalchemy.engine.Engine [cached since 817.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 'e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:31,549 INFO sqlalchemy.engine.Engine SELECT audit_logs.id AS audit_logs_id, audit_logs.user_id AS audit_logs_user_id, audit_logs.application_id AS audit_logs_application_id, audit_logs.action AS audit_logs_action, audit_logs.resource AS audit_logs_resource, audit_logs.details AS audit_logs_details, audit_logs.ip_address AS audit_logs_ip_address, audit_logs.user_agent AS audit_logs_user_agent, audit_logs.created_at AS audit_logs_created_at 
+FROM audit_logs 
+WHERE audit_logs.application_id = ? ORDER BY audit_logs.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,549 INFO sqlalchemy.engine.Engine [cached since 817.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 50, 0)
+INFO:     127.0.0.1:59242 - "GET /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:35:31,550 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:31,550 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,550 INFO sqlalchemy.engine.Engine [cached since 839.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:31,550 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.user_id = ?
+2026-06-11 12:35:31,550 INFO sqlalchemy.engine.Engine [cached since 839.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37',)
+INFO:     127.0.0.1:59087 - "GET /api/applications HTTP/1.1" 200 OK
+2026-06-11 12:35:31,550 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:35:31,550 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:35:31,552 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:35:31,552 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,552 INFO sqlalchemy.engine.Engine [cached since 839.9s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:31,552 INFO sqlalchemy.engine.Engine SELECT applications.id AS applications_id, applications.user_id AS applications_user_id, applications.name AS applications_name, applications.description AS applications_description, applications.environment AS applications_environment, applications.provider AS applications_provider, applications.is_active AS applications_is_active, applications.created_at AS applications_created_at, applications.updated_at AS applications_updated_at 
+FROM applications 
+WHERE applications.id = ? AND applications.user_id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,552 INFO sqlalchemy.engine.Engine [cached since 817.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 'e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+2026-06-11 12:35:31,553 INFO sqlalchemy.engine.Engine SELECT audit_logs.id AS audit_logs_id, audit_logs.user_id AS audit_logs_user_id, audit_logs.application_id AS audit_logs_application_id, audit_logs.action AS audit_logs_action, audit_logs.resource AS audit_logs_resource, audit_logs.details AS audit_logs_details, audit_logs.ip_address AS audit_logs_ip_address, audit_logs.user_agent AS audit_logs_user_agent, audit_logs.created_at AS audit_logs_created_at 
+FROM audit_logs 
+WHERE audit_logs.application_id = ? ORDER BY audit_logs.created_at DESC
+ LIMIT ? OFFSET ?
+2026-06-11 12:35:31,553 INFO sqlalchemy.engine.Engine [cached since 817.1s ago] ('2eb4d9f5-5a69-453a-9d6a-01d95a55b327', 50, 0)
+INFO:     127.0.0.1:59087 - "GET /api/applications/2eb4d9f5-5a69-453a-9d6a-01d95a55b327/audit-logs?limit=50 HTTP/1.1" 200 OK
+2026-06-11 12:35:31,553 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     ('127.0.0.1', 59244) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59262) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59264) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59278) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59280) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59298) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59683) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     127.0.0.1:59749 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59751 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+2026-06-11 12:36:41,387 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:36:41,387 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:36:41,387 INFO sqlalchemy.engine.Engine [cached since 909.7s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+INFO:     127.0.0.1:59749 - "GET /api/auth/me HTTP/1.1" 200 OK
+2026-06-11 12:36:41,388 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-06-11 12:36:41,389 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-06-11 12:36:41,389 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.password_hash AS users_password_hash, users.tier AS users_tier, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-06-11 12:36:41,389 INFO sqlalchemy.engine.Engine [cached since 909.7s ago] ('e2b277b9-f3d9-4a1e-b1b7-d4fe4bbc3f37', 1, 0)
+INFO:     127.0.0.1:59749 - "GET /api/auth/me HTTP/1.1" 200 OK
+2026-06-11 12:36:41,390 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     ('127.0.0.1', 59770) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59778) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59790) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59796) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59814) - "WebSocket /notifications?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmIyNzdiOS1mM2Q5LTRhMWUtYjFiNy1kNGZlNGJiYzNmMzciLCJleHAiOjE3ODExNjI0OTF9.9j62Wy5ewmf_AVw1FTdpxpoUSE1buGQkYwbLmm098xc" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
