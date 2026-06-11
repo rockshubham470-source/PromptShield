@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
-// Add token to requests
+// Add token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -16,7 +16,7 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// Handle errors
+// Handle auth errors
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -28,7 +28,6 @@ api.interceptors.response.use(
   }
 )
 
-// Notification API endpoints
 export const notificationApi = {
   fetchNotifications: () => api.get('/notifications'),
   markAsRead: (id: string) => api.put(`/notifications/${id}/read`),
