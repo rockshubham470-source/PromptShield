@@ -25,33 +25,45 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   checkAuth: async () => {
     const token = localStorage.getItem('token')
-
     if (!token) {
       set({ isAuthenticated: false, user: null })
       return
     }
 
     try {
-      const response = await api.get('/auth/me')
-
-      set({
-        user: response.data,
-        isAuthenticated: true,
-        token,
-      })
+      const res = await api.get('/auth/me')
+      set({ user: res.data, isAuthenticated: true, token })
     } catch {
       localStorage.removeItem('token')
-      set({ isAuthenticated: false, user: null, token: null })
+      set({ user: null, isAuthenticated: false, token: null })
     }
   },
 
   login: async (email, password) => {
-    const response = await api.post('/auth/login', {
+    const res = await api.post('/auth/login', {
       email,
       password,
     })
 
-    const { access_token, user } = response.data
+    const { access_token, user } = res.data
+
+    localStorage.setItem('token', access_token)
+
+    set({
+      token: access_token,
+      user,
+      isAuthenticated: true,
+    })
+  },
+
+  signup: async (email, password, name) => {
+    const res = await api.post('/auth/signup', {
+      email,
+      password,
+      name,
+    })
+
+    const { access_token, user } = res.data
 
     localStorage.setItem('token', access_token)
 
@@ -65,23 +77,5 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: () => {
     localStorage.removeItem('token')
     set({ user: null, token: null, isAuthenticated: false })
-  },
-
-  signup: async (email, password, name) => {
-    const response = await api.post('/auth/signup', {
-      email,
-      password,
-      name,
-    })
-
-    const { access_token, user } = response.data
-
-    localStorage.setItem('token', access_token)
-
-    set({
-      token: access_token,
-      user,
-      isAuthenticated: true,
-    })
   },
 }))
