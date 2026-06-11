@@ -30,10 +30,10 @@ api.interceptors.response.use(
 
 // Notification API endpoints
 export const notificationApi = {
-  fetchNotifications: () => api.get('/api/notifications'),
-  markAsRead: (id: string) => api.put(`/api/notifications/${id}/read`),
-  markAllAsRead: () => api.put('/api/notifications/read-all'),
-  deleteNotification: (id: string) => api.delete(`/api/notifications/${id}`)
+  fetchNotifications: () => api.get('/notifications'),
+  markAsRead: (id: string) => api.put(`/notifications/${id}/read`),
+  markAllAsRead: () => api.put('/notifications/read-all'),
+  deleteNotification: (id: string) => api.delete(`/notifications/${id}`)
 }
 
 export default api

@@ -31,7 +31,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
 
     try {
-      const response = await api.get('/api/auth/me')
+      const response = await api.get('/auth/me')
       set({ user: response.data, isAuthenticated: true, token })
     } catch {
       localStorage.removeItem('token')
@@ -40,7 +40,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   login: async (email: string, password: string) => {
-  const response = await api.post('/api/auth/login', {
+  const response = await api.post('/auth/login', {
     email,
     password,
   })
